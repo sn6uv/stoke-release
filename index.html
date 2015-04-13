@@ -16,14 +16,14 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
-          <a id="forkme_banner" href="https://github.com/eschkufz/stoke-release">View on GitHub</a>
+          <a id="forkme_banner" href="https://github.com/StanfordPL/stoke-release">View on GitHub</a>
 
           <h1 id="project_title">STOKE</h1>
           <h2 id="project_tagline">A Stochastic Optimizer for x86_64</h2>
 
             <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/eschkufz/stoke-release/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/eschkufz/stoke-release/tarball/master">Download this project as a tar.gz file</a>
+              <a class="zip_download_link" href="https://github.com/StanfordPL/stoke-release/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/StanfordPL/stoke-release/tarball/master">Download this project as a tar.gz file</a>
             </section>
         </header>
     </div>
@@ -173,26 +173,26 @@ C++ program that repeatedly counts the number of bits (population count) in the
 
 <div class="highlight highlight-c++"><pre><span class="pl-c">// main.cc</span>
 
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>cstdlib<span class="pl-pds">&gt;</span></span>
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>stddef.h<span class="pl-pds">&gt;</span></span>
-#<span class="pl-k">include</span> <span class="pl-s1"><span class="pl-pds">&lt;</span>stdint.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>cstdlib<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>stddef.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>stdint.h<span class="pl-pds">&gt;</span></span>
 
-<span class="pl-k">using</span> <span class="pl-st">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
+<span class="pl-k">using</span> <span class="pl-k">namespace</span> <span class="pl-en">std</span><span class="pl-k">;</span>
 
-<span class="pl-s3">size_t</span> <span class="pl-en">popcnt</span>(<span class="pl-s3">uint64_t</span> x) {
-  <span class="pl-st">int</span> res = <span class="pl-c1">0</span>;
+<span class="pl-c1">size_t</span> <span class="pl-en">popcnt</span>(<span class="pl-c1">uint64_t</span> x) {
+  <span class="pl-k">int</span> res = <span class="pl-c1">0</span>;
   <span class="pl-k">for</span> ( ; x &gt; <span class="pl-c1">0</span>; x &gt;&gt;= <span class="pl-c1">1</span> ) {
     res += x &amp; 0x1ull;
   }
   <span class="pl-k">return</span> res;
 }
 
-<span class="pl-st">int</span> <span class="pl-en">main</span>(<span class="pl-st">int</span> argc, <span class="pl-st">char</span>** argv) {
-  <span class="pl-s">const</span> <span class="pl-st">auto</span> itr = <span class="pl-s3">atoi</span>(argv[<span class="pl-c1">1</span>]);
+<span class="pl-k">int</span> <span class="pl-en">main</span>(<span class="pl-k">int</span> argc, <span class="pl-k">char</span>** argv) {
+  <span class="pl-k">const</span> <span class="pl-k">auto</span> itr = <span class="pl-c1">atoi</span>(argv[<span class="pl-c1">1</span>]);
 
-  <span class="pl-st">auto</span> ret = <span class="pl-c1">0</span>;
-  <span class="pl-k">for</span> ( <span class="pl-st">auto</span> i = <span class="pl-c1">0</span>; i &lt; itr; ++i ) {
-    ret += <span class="pl-s3">popcnt</span>(i);
+  <span class="pl-k">auto</span> ret = <span class="pl-c1">0</span>;
+  <span class="pl-k">for</span> ( <span class="pl-k">auto</span> i = <span class="pl-c1">0</span>; i &lt; itr; ++i ) {
+    ret += <span class="pl-c1">popcnt</span>(i);
   }
 
   <span class="pl-k">return</span> ret;</pre></div>
@@ -255,17 +255,17 @@ typing:</p>
 <p>Because <code>main.cc</code> was compiled using <code>g++</code>, the text of the <code>popcnt()</code> function
 will appear under the mangled name <code>_Z6popcntm</code> in <code>bins/_Z6popcntm.s</code>.</p>
 
-<div class="highlight highlight-asm"><pre>  <span class="pl-s1">.text</span>
+<div class="highlight highlight-asm"><pre>  <span class="pl-s">.text</span>
   .globl _Z6popcntm
   .type _Z6popcntm, @function
 <span class="pl-en">_Z6popcntm:</span>
-  <span class="pl-k">xorl</span>   %<span class="pl-s">eax</span>,%<span class="pl-s">eax</span>
+  <span class="pl-k">xorl</span>   %<span class="pl-k">eax</span>,%<span class="pl-k">eax</span>
   testq  %rdi,%rdi
   <span class="pl-k">je</span>     .L_4005b0
   <span class="pl-k">nop</span>
 <span class="pl-en">.L_4005a0:</span>
   movq   %rdi,%rdx
-  <span class="pl-k">andl</span>   $<span class="pl-c1">0x1</span>,%<span class="pl-s">edx</span>
+  <span class="pl-k">andl</span>   $<span class="pl-c1">0x1</span>,%<span class="pl-k">edx</span>
   addq   %rdx,%rax
   shrq   $<span class="pl-c1">0x1</span>,%rdi
   <span class="pl-k">jne</span>    .L_4005a0
@@ -497,7 +497,7 @@ Total           100%         34.544%       20.883%
 rewrite that it discovered to <code>result.s</code>. Because this is a particularly simple
 example, STOKE is almost guaranteed to produce the optimal rewrite:</p>
 
-<div class="highlight highlight-asm"><pre>  <span class="pl-s1">.text</span>
+<div class="highlight highlight-asm"><pre>  <span class="pl-s">.text</span>
   .globl _Z6popcntm
   .type _Z6popcntm @function
 <span class="pl-en">_Z6popcntm:</span>
@@ -647,7 +647,7 @@ subdirectory of the <code>src/</code> directory:</p>
 <p>Initial state types are defined in <code>src/search/init.h</code> along with an additional
 type for user-defined extensions.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">enum</span> <span class="pl-st">class</span> <span class="pl-en">Init</span> {
+<div class="highlight highlight-c++"><pre><span class="pl-k">enum</span> <span class="pl-k">class</span> <span class="pl-en">Init</span> {
   EMPTY,
   ZERO,
   TARGET,
@@ -664,30 +664,30 @@ dispatches to the family of <code>Search::configure_xxxxx() const</code> methods
 extensions should be placed in the <code>Search::configure_extension() const</code> method,
 which can be triggered by specifying <code>--init extension</code>.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">void</span> <span class="pl-en">Search::configure_extension</span>(<span class="pl-s">const</span> Cfg&amp; target, SearchState&amp; state) <span class="pl-s">const</span> {
+<div class="highlight highlight-c++"><pre><span class="pl-k">void</span> <span class="pl-en">Search::configure_extension</span>(<span class="pl-k">const</span> Cfg&amp; target, SearchState&amp; state) <span class="pl-k">const</span> {
   <span class="pl-c">// Add user-defined logic here ...</span>
 
   <span class="pl-c">// Invariant 1: Search state should agree with target on boundary conditions.</span>
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">current</span>.<span class="pl-s3">def_ins</span>() == target.<span class="pl-s3">def_ins</span>());
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">current</span>.<span class="pl-s3">live_outs</span>() == target.<span class="pl-s3">live_outs</span>());
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">current</span>.<span class="pl-c1">def_ins</span>() == target.<span class="pl-c1">def_ins</span>());
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">current</span>.<span class="pl-c1">live_outs</span>() == target.<span class="pl-c1">live_outs</span>());
 
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">best_yet</span>.<span class="pl-s3">def_ins</span>() == target.<span class="pl-s3">def_ins</span>());
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">best_yet</span>.<span class="pl-s3">live_outs</span>() == target.<span class="pl-s3">live_outs</span>());
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">best_yet</span>.<span class="pl-c1">def_ins</span>() == target.<span class="pl-c1">def_ins</span>());
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">best_yet</span>.<span class="pl-c1">live_outs</span>() == target.<span class="pl-c1">live_outs</span>());
 
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">best_correct</span>.<span class="pl-s3">def_ins</span>() == target.<span class="pl-s3">def_ins</span>());
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">best_correct</span>.<span class="pl-s3">live_outs</span>() == target.<span class="pl-s3">live_outs</span>());
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">best_correct</span>.<span class="pl-c1">def_ins</span>() == target.<span class="pl-c1">def_ins</span>());
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">best_correct</span>.<span class="pl-c1">live_outs</span>() == target.<span class="pl-c1">live_outs</span>());
 
   <span class="pl-c">// Invariant 2: Search state must be in a valid state. This function isn't on</span>
   <span class="pl-c">// a critical path, so this can safely be accomplished by calling</span>
-  state.<span class="pl-vo">current</span>.<span class="pl-s3">recompute</span>();
-  state.<span class="pl-vo">best_yet</span>.<span class="pl-s3">recompute</span>();
-  state.<span class="pl-vo">best_correct</span>.<span class="pl-s3">recompute</span>();
+  state.<span class="pl-smi">current</span>.<span class="pl-c1">recompute</span>();
+  state.<span class="pl-smi">best_yet</span>.<span class="pl-c1">recompute</span>();
+  state.<span class="pl-smi">best_correct</span>.<span class="pl-c1">recompute</span>();
 
   <span class="pl-c">// Invariant 3: Search state must agree on first instruction. This instruction</span>
   <span class="pl-c">// must be the label definition that appears in the target.</span>
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">current</span>.<span class="pl-s3">get_code</span>()[<span class="pl-c1">0</span>] == target.<span class="pl-s3">get_code</span>()[<span class="pl-c1">0</span>]);
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">best_yet</span>.<span class="pl-s3">get_code</span>()[<span class="pl-c1">0</span>] == target.<span class="pl-s3">get_code</span>()[<span class="pl-c1">0</span>]);
-  <span class="pl-s3">assert</span>(state.<span class="pl-vo">best_correct</span>.<span class="pl-s3">get_code</span>()[<span class="pl-c1">0</span>] == target.<span class="pl-s3">get_code</span>()[<span class="pl-c1">0</span>]);
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">current</span>.<span class="pl-c1">get_code</span>()[<span class="pl-c1">0</span>] == target.<span class="pl-c1">get_code</span>()[<span class="pl-c1">0</span>]);
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">best_yet</span>.<span class="pl-c1">get_code</span>()[<span class="pl-c1">0</span>] == target.<span class="pl-c1">get_code</span>()[<span class="pl-c1">0</span>]);
+  <span class="pl-c1">assert</span>(state.<span class="pl-smi">best_correct</span>.<span class="pl-c1">get_code</span>()[<span class="pl-c1">0</span>] == target.<span class="pl-c1">get_code</span>()[<span class="pl-c1">0</span>]);
 
   <span class="pl-c">// See Search::configure for additional invariants</span>
 }</pre></div>
@@ -698,7 +698,7 @@ which can be triggered by specifying <code>--init extension</code>.</p>
 <p>Transformation types are defined in <code>src/search/move.h</code> along with an
 additional type for user-defined extensions.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">enum</span> <span class="pl-st">class</span> <span class="pl-en">Move</span> {
+<div class="highlight highlight-c++"><pre><span class="pl-k">enum</span> <span class="pl-k">class</span> <span class="pl-en">Move</span> {
   INSTRUCTION = <span class="pl-c1">0</span>,
   OPCODE,
   OPERAND,
@@ -721,7 +721,7 @@ should be placed in the <code>Transforms::extension_move()</code> and
 <code>Transforms::undo_extension_move()</code> methods, which can be triggered by
 specifying a non-zero <code>--extension_mass</code>.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">bool</span> <span class="pl-en">Transforms::extension_move</span>(Cfg&amp; cfg) {
+<div class="highlight highlight-c++"><pre><span class="pl-k">bool</span> <span class="pl-en">Transforms::extension_move</span>(Cfg&amp; cfg) {
   <span class="pl-c">// Add user-defined implementation here ...</span>
 
   <span class="pl-c">// Invariant 1:</span>
@@ -743,7 +743,7 @@ specifying a non-zero <code>--extension_mass</code>.</p>
   <span class="pl-k">return</span> <span class="pl-c1">false</span>;
 }</pre></div>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">void</span> <span class="pl-en">Transforms::undo_extension_move</span>(Cfg&amp; cfg) {
+<div class="highlight highlight-c++"><pre><span class="pl-k">void</span> <span class="pl-en">Transforms::undo_extension_move</span>(Cfg&amp; cfg) {
   <span class="pl-c">// Add user-defined implementation here ...</span>
 
   <span class="pl-c">// Invariant: If the previous invocation of extension_move() returned true, this</span>
@@ -764,7 +764,7 @@ invalidate data-flow values.</p>
 
 <p>Performance term types are defined in <code>src/cost/performance_term.h</code> along with an additional type for user-defined extensions.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">enum</span> <span class="pl-st">class</span> <span class="pl-en">PerformanceTerm</span> {
+<div class="highlight highlight-c++"><pre><span class="pl-k">enum</span> <span class="pl-k">class</span> <span class="pl-en">PerformanceTerm</span> {
   NONE,
   SIZE,
   LATENCY,
@@ -780,13 +780,13 @@ This value controls the behavior of the <code>CostFunction::evaluate_performance
   should be placed in the <code>CostFunction::extension_performance() const</code> method,
   which can be triggered by specifying <code>--perf extension</code>.</p>
 
-<div class="highlight highlight-c++"><pre>Cost <span class="pl-en">CostFunction::extension_performance</span>(<span class="pl-s">const</span> Cfg&amp; cfg) <span class="pl-s">const</span> { 
+<div class="highlight highlight-c++"><pre>Cost <span class="pl-en">CostFunction::extension_performance</span>(<span class="pl-k">const</span> Cfg&amp; cfg) <span class="pl-k">const</span> { 
   Cost res = <span class="pl-c1">0</span>;                                                  
 
   <span class="pl-c">// Add user-defined implementation here ... </span>
 
   <span class="pl-c">// Invariant: Return value should not exceed max_performance_cost </span>
-  <span class="pl-s3">assert</span>(res &lt;= max_performance_cost); 
+  <span class="pl-c1">assert</span>(res &lt;= max_performance_cost); 
 
   <span class="pl-k">return</span> res;  
 }</pre></div>
@@ -796,7 +796,7 @@ This value controls the behavior of the <code>CostFunction::evaluate_performance
 
 <p>Correctness term types are defined in <code>src/cost/reduction.h</code> along with an additional type for user-defined extensions.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">enum</span> <span class="pl-st">class</span> <span class="pl-en">Reduction</span> {
+<div class="highlight highlight-c++"><pre><span class="pl-k">enum</span> <span class="pl-k">class</span> <span class="pl-en">Reduction</span> {
   SUM,
   MAX,
 
@@ -812,7 +812,7 @@ method for aggregating errors observed across testcases. User-defined
 extensions should be placed in the <code>CostFunction::extension_correctness()</code>
 method, which can be triggered by specifying <code>--reduction extension</code>.</p>
 
-<div class="highlight highlight-c++"><pre>Cost <span class="pl-en">CostFunction::extension_correctness</span>(<span class="pl-s">const</span> Cfg&amp; cfg, Cost max) {                                             
+<div class="highlight highlight-c++"><pre>Cost <span class="pl-en">CostFunction::extension_correctness</span>(<span class="pl-k">const</span> Cfg&amp; cfg, Cost max) {                                             
   Cost res = <span class="pl-c1">0</span>;                                                                                                  
 
   <span class="pl-c">// Add user-defined implementation here ... </span>
@@ -822,7 +822,7 @@ method, which can be triggered by specifying <code>--reduction extension</code>.
   <span class="pl-c">// equals or exceeds that value.                                                                               </span>
 
   <span class="pl-c">// Invariant 1: Return value should not exceed max_correctness_cost                                            </span>
-  <span class="pl-s3">assert</span>(res &lt;= max_correctness_cost);                                                                           
+  <span class="pl-c1">assert</span>(res &lt;= max_correctness_cost);                                                                           
 
   <span class="pl-k">return</span> res;                                                                                                    
 }</pre></div>
@@ -832,7 +832,7 @@ method, which can be triggered by specifying <code>--reduction extension</code>.
 
 <p>Live-out error measurement types are defined in <code>src/cost/distance.h</code> along with an additional type for user-defined extensions.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">enum</span> <span class="pl-st">class</span> <span class="pl-en">Distance</span> {
+<div class="highlight highlight-c++"><pre><span class="pl-k">enum</span> <span class="pl-k">class</span> <span class="pl-en">Distance</span> {
   HAMMING,
   ULP,
 
@@ -848,13 +848,13 @@ This value controls the behavior of the <code>CostFunction::evaluate_distance()
   should be placed in the <code>CostFunction::extension_distance() const</code> method,
   which can be triggered by specifying <code>--distance extension</code>.</p>
 
-<div class="highlight highlight-c++"><pre>Cost <span class="pl-en">CostFunction::extension_distance</span>(<span class="pl-s3">uint64_t</span> x, <span class="pl-s3">uint64_t</span> y) <span class="pl-s">const</span> {                                            
+<div class="highlight highlight-c++"><pre>Cost <span class="pl-en">CostFunction::extension_distance</span>(<span class="pl-c1">uint64_t</span> x, <span class="pl-c1">uint64_t</span> y) <span class="pl-k">const</span> {                                            
   Cost res = <span class="pl-c1">0</span>;
 
   <span class="pl-c">// Add user-defined implementation here ...</span>
 
   <span class="pl-c">// Invariant 1: Return value should not exceed max_error_cost</span>
-  <span class="pl-s3">assert</span>(res &lt;= max_error_cost);
+  <span class="pl-c1">assert</span>(res &lt;= max_error_cost);
 
   <span class="pl-k">return</span> res;                                                                                                   
 }</pre></div>
@@ -865,7 +865,7 @@ This value controls the behavior of the <code>CostFunction::evaluate_distance()
 <p>Verification strategy types are defined in <code>src/verifier/strategy.h</code> along with
 an additional type for user-defined extensions.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">enum</span> <span class="pl-st">class</span> <span class="pl-en">Strategy</span> {
+<div class="highlight highlight-c++"><pre><span class="pl-k">enum</span> <span class="pl-k">class</span> <span class="pl-en">Strategy</span> {
   NONE,
   HOLD_OUT,
   FORMAL,
@@ -881,7 +881,7 @@ which represent a method for verifying correctness. User-defined extensions
 should be placed in the <code>Verifier::extension_verify()</code> method, which can be
 triggered by specifying <code>--strategy extension</code>.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">bool</span> <span class="pl-en">Verifier::extension_verify</span>(<span class="pl-s">const</span> Cfg&amp; target, <span class="pl-s">const</span> Cfg&amp; rewrite) {                                         
+<div class="highlight highlight-c++"><pre><span class="pl-k">bool</span> <span class="pl-en">Verifier::extension_verify</span>(<span class="pl-k">const</span> Cfg&amp; target, <span class="pl-k">const</span> Cfg&amp; rewrite) {                                         
   <span class="pl-c">// Add user-defined implementation here ...</span>
 
   <span class="pl-c">// Invariant 1. If this method returns false and is able to produce a</span>
@@ -906,7 +906,7 @@ triggered by specifying <code>--strategy extension</code>.</p>
 following syntax. Argument separators which are printed as part of help
 messages are specified by defining a heading variable:</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">auto</span>&amp; heading = Heading::create(<span class="pl-s1"><span class="pl-pds">"</span>Heading Description:<span class="pl-pds">"</span></span>);</pre></div>
+<div class="highlight highlight-c++"><pre><span class="pl-k">auto</span>&amp; heading = Heading::create(<span class="pl-s"><span class="pl-pds">"</span>Heading Description:<span class="pl-pds">"</span></span>);</pre></div>
 
 <p>Command line flags are specified by declaring a <code>FlagArg</code>.</p>
 
@@ -917,43 +917,43 @@ messages are specified by defining a heading variable:</p>
 
 <p>Any of the built-in c++ primitive types are specified by declaring a <code>ValueArg</code>.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">auto</span>&amp; val = ValueArg&lt;<span class="pl-st">int</span>&gt;::create(<span class="pl-s1"><span class="pl-pds">"</span>value_name<span class="pl-pds">"</span></span>)
-  .alternate(<span class="pl-s1"><span class="pl-pds">"</span>alternate_value_name<span class="pl-pds">"</span></span>)
-  .usage(<span class="pl-s1"><span class="pl-pds">"</span>&lt;int&gt;<span class="pl-pds">"</span></span>)
-  .description(<span class="pl-s1"><span class="pl-pds">"</span>What this value represents<span class="pl-pds">"</span></span>)
+<div class="highlight highlight-c++"><pre><span class="pl-k">auto</span>&amp; val = ValueArg&lt;<span class="pl-k">int</span>&gt;::create(<span class="pl-s"><span class="pl-pds">"</span>value_name<span class="pl-pds">"</span></span>)
+  .alternate(<span class="pl-s"><span class="pl-pds">"</span>alternate_value_name<span class="pl-pds">"</span></span>)
+  .usage(<span class="pl-s"><span class="pl-pds">"</span>&lt;int&gt;<span class="pl-pds">"</span></span>)
+  .description(<span class="pl-s"><span class="pl-pds">"</span>What this value represents<span class="pl-pds">"</span></span>)
   .default_val(<span class="pl-c1">0</span>);</pre></div>
 
 <p>User-defined types are specified by additionally providing function objects that define I/O methods.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">struct</span> <span class="pl-en">T</span> {
-  <span class="pl-st">int</span> x, y, z;
+<div class="highlight highlight-c++"><pre><span class="pl-k">struct</span> <span class="pl-en">T</span> {
+  <span class="pl-k">int</span> x, y, z;
 };
 
-<span class="pl-st">struct</span> <span class="pl-en">Reader</span> {
-  <span class="pl-st">void</span> <span class="pl-en">operator</span>()(istream&amp; is, T&amp; t) <span class="pl-s">const</span> {
-    is &gt;&gt; t.<span class="pl-vo">x</span> &gt;&gt; t.<span class="pl-vo">y</span> &gt;&gt; t.<span class="pl-vo">z</span>;
+<span class="pl-k">struct</span> <span class="pl-en">Reader</span> {
+  <span class="pl-k">void</span> <span class="pl-en">operator</span>()(istream&amp; is, T&amp; t) <span class="pl-k">const</span> {
+    is &gt;&gt; t.<span class="pl-smi">x</span> &gt;&gt; t.<span class="pl-smi">y</span> &gt;&gt; t.<span class="pl-smi">z</span>;
   }
 };
 
-<span class="pl-st">struct</span> <span class="pl-en">Writer</span> {
-  <span class="pl-st">void</span> <span class="pl-en">operator</span>()(ostream&amp; os, <span class="pl-s">const</span> T&amp; t) <span class="pl-s">const</span> {
-    os &lt;&lt; t.<span class="pl-vo">x</span> &lt;&lt; <span class="pl-s1"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> &lt;&lt; t.<span class="pl-vo">y</span> &lt;&lt; <span class="pl-s1"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> &lt;&lt; t.<span class="pl-vo">z</span>;
+<span class="pl-k">struct</span> <span class="pl-en">Writer</span> {
+  <span class="pl-k">void</span> <span class="pl-en">operator</span>()(ostream&amp; os, <span class="pl-k">const</span> T&amp; t) <span class="pl-k">const</span> {
+    os &lt;&lt; t.<span class="pl-smi">x</span> &lt;&lt; <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> &lt;&lt; t.<span class="pl-smi">y</span> &lt;&lt; <span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span> &lt;&lt; t.<span class="pl-smi">z</span>;
   }
 };
 
-<span class="pl-st">auto</span>&amp; val = ValueArg&lt;T, Reader, Writer&gt;::create(<span class="pl-s1"><span class="pl-pds">"</span>value_name<span class="pl-pds">"</span></span>)
-  .alternate(<span class="pl-s1"><span class="pl-pds">"</span>alternate_value_name<span class="pl-pds">"</span></span>)
-  .usage(<span class="pl-s1"><span class="pl-pds">"</span>&lt;int&gt; &lt;int&gt; &lt;int&gt;<span class="pl-pds">"</span></span>)
-  .description(<span class="pl-s1"><span class="pl-pds">"</span>What this value represents<span class="pl-pds">"</span></span>)
+<span class="pl-k">auto</span>&amp; val = ValueArg&lt;T, Reader, Writer&gt;::create(<span class="pl-s"><span class="pl-pds">"</span>value_name<span class="pl-pds">"</span></span>)
+  .alternate(<span class="pl-s"><span class="pl-pds">"</span>alternate_value_name<span class="pl-pds">"</span></span>)
+  .usage(<span class="pl-s"><span class="pl-pds">"</span>&lt;int&gt; &lt;int&gt; &lt;int&gt;<span class="pl-pds">"</span></span>)
+  .description(<span class="pl-s"><span class="pl-pds">"</span>What this value represents<span class="pl-pds">"</span></span>)
   .default_val({<span class="pl-c1">0</span>,<span class="pl-c1">0</span>,<span class="pl-c1">0</span>});</pre></div>
 
 <p>For complex values that are better suited to being read from files, a <code>FileArg</code>
 may be more appropriate than a <code>ValueArg</code>. The syntax is identical.</p>
 
-<div class="highlight highlight-c++"><pre><span class="pl-st">auto</span>&amp; val = FileArg&lt;Complex, ComplexReader, ComplexWriter&gt;::create(<span class="pl-s1"><span class="pl-pds">"</span>value_name<span class="pl-pds">"</span></span>)
-  .alternate(<span class="pl-s1"><span class="pl-pds">"</span>alternate_value_name<span class="pl-pds">"</span></span>)
-  .usage(<span class="pl-s1"><span class="pl-pds">"</span>&lt;complex representation&gt;<span class="pl-pds">"</span></span>)
-  .description(<span class="pl-s1"><span class="pl-pds">"</span>What this value represents<span class="pl-pds">"</span></span>)
+<div class="highlight highlight-c++"><pre><span class="pl-k">auto</span>&amp; val = FileArg&lt;Complex, ComplexReader, ComplexWriter&gt;::create(<span class="pl-s"><span class="pl-pds">"</span>value_name<span class="pl-pds">"</span></span>)
+  .alternate(<span class="pl-s"><span class="pl-pds">"</span>alternate_value_name<span class="pl-pds">"</span></span>)
+  .usage(<span class="pl-s"><span class="pl-pds">"</span>&lt;complex representation&gt;<span class="pl-pds">"</span></span>)
+  .description(<span class="pl-s"><span class="pl-pds">"</span>What this value represents<span class="pl-pds">"</span></span>)
   .default_val(Complex());</pre></div>
 
 <h1>
@@ -972,8 +972,8 @@ is with the built-in github issue tracker.</p>
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">STOKE maintained by <a href="https://github.com/eschkufz">eschkufz</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        <p class="copyright">STOKE maintained by <a href="https://github.com/StanfordPL">StanfordPL</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
 
